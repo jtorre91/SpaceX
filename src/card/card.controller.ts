@@ -1,11 +1,17 @@
+import { Card } from './models/card';
 import { CardService } from './card.service';
-import { Controller, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
 
 @Controller('card')
 export class CardController {
   constructor(private readonly cardService: CardService) {}
   @Post()
-  create(): string {
-    return this.cardService.createCard();
+  create(@Body() card: Card): string {
+    try {
+      return JSON.stringify(this.cardService.createCard(card));
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException(error, error.message);
+    }
   }
 }

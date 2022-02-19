@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { Card } from './models/card';
 
 @Injectable()
 export class CardService {
-  createCard() {
-    return 'TODO: It will create a card in trello';
+  createCard(card: Card): Card {
+    return card;
   }
 }
