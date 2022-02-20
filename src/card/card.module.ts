@@ -10,12 +10,17 @@ import { HttpModule } from '@nestjs/axios';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         timeout: configService.get('appConfig.apiTrello.timeout'),
+        maxRedirects: configService.get('appConfig.apiTrello.maxRedirects'),
+        params: {
+          key: configService.get('appConfig.apiTrello.key'),
+          token: configService.get('appConfig.apiTrello.token'),
+        },
       }),
       inject: [ConfigService],
     }),
   ],
   controllers: [CardController],
-  providers: [CardService],
+  providers: [CardController, CardService],
   exports: [CardController],
 })
 export class CardModule {}
