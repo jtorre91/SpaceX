@@ -11,7 +11,7 @@ export class QueryBuilder {
   ): Promise<string> {
     const key = card.type.toUpperCase();
     if (apiTrello.cardTypes.includes(key)) {
-      const mapper = new CardType().mapper(card, apiTrello);
+      const mapper = new CardType().mapper(card, apiTrello.shuffleMembers);
       if (mapper.has(key)) {
         const params = new TrelloParams(
           apiTrello.key,

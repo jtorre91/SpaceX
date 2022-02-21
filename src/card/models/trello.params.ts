@@ -8,7 +8,7 @@ export class TrelloParams {
   private readonly name: string;
   private readonly desc?: string;
   private readonly category?: string;
-  private idMembers?: Array<string>; // va a ser un boolean
+  private readonly shuffleMembers?: boolean;
 
   constructor(
     key: string,
@@ -24,11 +24,18 @@ export class TrelloParams {
     else throw Error('The field title is missing');
     this.desc = otherParams.desc ? otherParams.desc : null;
     this.category = otherParams.category ? otherParams.category : null;
-    this.idMembers = otherParams.idMembers ? otherParams.idMembers : null;
+    this.shuffleMembers = otherParams.shuffleMembers ? otherParams.shuffleMembers : false;
   }
 
+  async toQuery() { 
+    let query = `key=${this.key}&token=${this.token}&idList=${this.idList}&name=${this.name}`;
+    if (this.desc) query = query.concat(`&desc=${this.desc}`);
+    if (this.category) query = await this.setLabel(query);
+    if (this.shuffleMembers) query = await this.setMember(query);
+    return query;
+  }
 
-  private async setLabels(query: string) {
+  private async setLabel(query: string) {
     if (this.category) {
       const labels = await this.cardController.searchOnBoard('labels');
       const mapper = new Category().mapper(labels);
@@ -40,12 +47,10 @@ export class TrelloParams {
       else throw Error('The field category is missing');
     } 
   }
-
-  async toQuery() { 
-    let query = `key=${this.key}&token=${this.token}&idList=${this.idList}&name=${this.name}`;
-    if (this.desc) query = query.concat(`&desc=${this.desc}`);
-    if (this.category) query = await this.setLabels(query);
-    if (this.idMembers) query = query.concat(`&idMembers=${this.idMembers}`);
-    return query;
+ 
+  private async setMember(query: string) {
+    const members = await this.cardController.searchOnBoard('members');
+    const user = members[Math.floor(Math.random() * members.length)];
+    return query.concat(`&idMembers=${user.id}`)
   }
 }

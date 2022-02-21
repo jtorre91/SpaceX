@@ -4,13 +4,13 @@ export class CardType {
   private MIN_SEED = 0;
   private MAX_SEED = 10000;
 
-  mapper(card: Card, trello: any): Map<string, any> {
+  mapper(card: Card, shuffleMembers: boolean): Map<string, any> {
     const map = new Map<string, any>();
     map.set('BUG', {
       name: this.createBugTitle(),
       desc: card.description,
       category: 'BUG',
-      idMembers: trello.idMembers, // Make a categoryMapper
+      shuffleMembers,
     });
     map.set('ISSUE', {
       name: card.title,
@@ -18,7 +18,7 @@ export class CardType {
     });
     map.set('TASK', {
       name: card.title,
-      category: card.category, // Make a categoryMapper
+      category: card.category,
     });
     return map;
   }

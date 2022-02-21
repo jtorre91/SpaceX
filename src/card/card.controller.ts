@@ -1,14 +1,8 @@
+/* eslint-disable prettier/prettier */
 import { ConfigService } from '@nestjs/config';
 import { CardService } from './card.service';
 import { QueryBuilder } from './builders/query.builder';
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  Get,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Post, Query } from '@nestjs/common';
 
 @Controller('card')
 export class CardController {
@@ -23,11 +17,7 @@ export class CardController {
   @Post()
   async create(@Body() card: any): Promise<any> {
     try {
-      const query = await this.queryBuilder.buildCreate(
-        card,
-        this.trelloConfig,
-        this,
-      );
+      const query = await this.queryBuilder.buildCreate(card, this.trelloConfig, this);
       return await this.cardService.createCard(query);
     } catch (error) {
       throw new BadRequestException(error.message);
