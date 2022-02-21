@@ -9,7 +9,7 @@ export class CardType {
     map.set('BUG', {
       name: this.createBugTitle(),
       desc: card.description,
-      idLabels: trello.idLabels,
+      category: 'BUG',
       idMembers: trello.idMembers, // Make a categoryMapper
     });
     map.set('ISSUE', {
@@ -18,7 +18,7 @@ export class CardType {
     });
     map.set('TASK', {
       name: card.title,
-      idLabels: trello.idLabels, // Make a categoryMapper
+      category: card.category, // Make a categoryMapper
     });
     return map;
   }

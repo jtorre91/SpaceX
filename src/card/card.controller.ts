@@ -7,6 +7,7 @@ import {
   Controller,
   Get,
   Post,
+  Query,
 } from '@nestjs/common';
 
 @Controller('card')
@@ -18,35 +19,28 @@ export class CardController {
   ) {}
 
   private readonly trelloConfig = this.configService.get('appConfig.apiTrello');
-  private readonly key = this.trelloConfig.key;
-  private readonly token = this.trelloConfig.token;
-  private readonly idBoard = this.trelloConfig.idBoard;
 
   @Post()
   async create(@Body() card: any): Promise<any> {
     try {
-      const query = this.queryBuilder.build(card, this.trelloConfig);
+      const query = await this.queryBuilder.buildCreate(
+        card,
+        this.trelloConfig,
+        this,
+      );
       return await this.cardService.createCard(query);
     } catch (error) {
       throw new BadRequestException(error.message);
     }
   }
 
-  @Get('/lists')
-  async lists(): Promise<any> {
+  @Get('/board')
+  async searchOnBoard(@Query('search') item: string): Promise<any> {
     try {
-      const query = `${this.idBoard}/lists?key=${this.key}&token=${this.token}`;
-      return this.cardService.getBoards(query);
-    } catch (error) {
-      throw new BadRequestException(error.message);
-    }
-  }
-
-  @Get('/labels')
-  async labels(): Promise<any> {
-    try {
-      const query = `${this.idBoard}/labels?key=${this.key}&token=${this.token}`;
-      return this.cardService.getBoards(query);
+      if (item) {
+        const query = this.queryBuilder.search(item, this.trelloConfig);
+        return this.cardService.getBoards(query);
+      }
     } catch (error) {
       throw new BadRequestException(error.message);
     }
