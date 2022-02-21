@@ -12,5 +12,6 @@ export default registerAs('appConfig', () => ({
     idBoard: '62101c96a9bb7d34db53d278',
     cardTypes: ['BUG', 'ISSUE', 'TASK'],
     idLabels: ['62101c968166f38753e0de83'],
+    idMembers: ['5b8d38f4d303443c7d1f62f3'],
   },
 }));

@@ -1,16 +1,16 @@
-import { BadRequestException } from '@nestjs/common';
 import { Card } from './card';
 
 export class CardType {
-  private MIN_NUM = 0;
-  private MAX_NUM = 1000;
+  private MIN_SEED = 0;
+  private MAX_SEED = 10000;
 
   mapper(card: Card, trello: any): Map<string, any> {
     const map = new Map<string, any>();
     map.set('BUG', {
       name: this.createBugTitle(),
       desc: card.description,
-      idLabels: '62101c968166f38753e0de83', // Make a categoryMapper
+      idLabels: trello.idLabels,
+      idMembers: trello.idMembers, // Make a categoryMapper
     });
     map.set('ISSUE', {
       name: card.title,
@@ -39,7 +39,8 @@ export class CardType {
     ];
     const wIndex = Math.floor(Math.random() * words.length);
     const word = words[wIndex];
-    const number = Math.random() * (this.MAX_NUM - this.MIN_NUM) + this.MIN_NUM;
+    // eslint-disable-next-line prettier/prettier
+    const number = Math.floor(Math.random() * (this.MAX_SEED - this.MIN_SEED + 1) + this.MIN_SEED);
     return `Bug-${word}-${number}`;
   }
 }
