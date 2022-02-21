@@ -28,8 +28,7 @@ export class CardController {
       const query = this.queryBuilder.build(card, this.trelloConfig);
       return await this.cardService.createCard(query);
     } catch (error) {
-      console.log(error);
-      throw new BadRequestException(error, error.message);
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -39,8 +38,7 @@ export class CardController {
       const query = `${this.idBoard}/lists?key=${this.key}&token=${this.token}`;
       return this.cardService.getBoards(query);
     } catch (error) {
-      console.log(error);
-      throw new BadRequestException(error, error.message);
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -50,8 +48,7 @@ export class CardController {
       const query = `${this.idBoard}/labels?key=${this.key}&token=${this.token}`;
       return this.cardService.getBoards(query);
     } catch (error) {
-      console.log(error);
-      throw new BadRequestException(error, error.message);
+      throw new BadRequestException(error.message);
     }
   }
 }

@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import { Card } from './card';
 
 export class CardType {

@@ -10,7 +10,8 @@ export class TrelloParams {
     this.key = key;
     this.token = token;
     this.idList = idList;
-    this.name = otherParams.name;
+    if (otherParams.name) this.name = otherParams.name;
+    else throw Error('The field title is missing');
     this.desc = otherParams.desc ? otherParams.desc : null;
     this.idLabels = otherParams.idLabels ? otherParams.idLabels : null;
   }

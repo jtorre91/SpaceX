@@ -4,6 +4,7 @@ export class Card {
   @IsString()
   @IsNotEmpty()
   readonly type: string;
+  @IsNotEmpty()
   @IsString()
   readonly title?: string;
   @IsString()
