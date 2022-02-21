@@ -1,45 +1,57 @@
 import { ConfigService } from '@nestjs/config';
-import { Card } from './models/card';
 import { CardService } from './card.service';
-// eslint-disable-next-line prettier/prettier
-import { BadRequestException, Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { QueryBuilder } from './builders/query.builder';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Post,
+} from '@nestjs/common';
 
 @Controller('card')
 export class CardController {
   constructor(
     private readonly configService: ConfigService,
     private readonly cardService: CardService,
+    private readonly queryBuilder: QueryBuilder,
   ) {}
 
-  private readonly key = this.configService.get('appConfig.apiTrello.key');
-  private readonly token = this.configService.get('appConfig.apiTrello.token');
-  // eslint-disable-next-line prettier/prettier
-  private readonly idList = this.configService.get('appConfig.apiTrello.idList');
-
-  @Get('/list')
-  async lists(): Promise<any> {
-    try {
-      const query = `62101c96a9bb7d34db53d278/lists?key=${this.key}&token=${this.token}`;
-      return this.cardService.getLists(query);
-    } catch (error) {
-      console.log(error);
-      throw new BadRequestException(error, error.message);
-    }
-  }
+  private readonly trelloConfig = this.configService.get('appConfig.apiTrello');
+  private readonly key = this.trelloConfig.key;
+  private readonly token = this.trelloConfig.token;
+  private readonly idBoard = this.trelloConfig.idBoard;
 
   @Post()
   async create(@Body() card: any): Promise<any> {
     try {
-      const query = this.queryBuilder(card);
-      const res = await this.cardService.createCard(query);
-      return res;
+      const query = this.queryBuilder.build(card, this.trelloConfig);
+      return await this.cardService.createCard(query);
     } catch (error) {
       console.log(error);
       throw new BadRequestException(error, error.message);
     }
   }
 
-  private queryBuilder(card: Card): string {
-    return `idList=${this.idList}&name=${card.title}2&desc=${card.description}&key=${this.key}&token=${this.token}`;
+  @Get('/lists')
+  async lists(): Promise<any> {
+    try {
+      const query = `${this.idBoard}/lists?key=${this.key}&token=${this.token}`;
+      return this.cardService.getBoards(query);
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException(error, error.message);
+    }
+  }
+
+  @Get('/labels')
+  async labels(): Promise<any> {
+    try {
+      const query = `${this.idBoard}/labels?key=${this.key}&token=${this.token}`;
+      return this.cardService.getBoards(query);
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException(error, error.message);
+    }
   }
 }

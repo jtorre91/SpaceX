@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Card } from './models/card';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom, map } from 'rxjs';
 
@@ -15,7 +14,7 @@ export class CardService {
   private readonly url = this.configService.get('appConfig.apiTrello.url');
 
 
-  async getLists(query: string): Promise<any> {
+  async getBoards(query: string): Promise<any> {
     try {
         const config = this.configService.get('appConfig');
         const url = config.apiTrello.url;

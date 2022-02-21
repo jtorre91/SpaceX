@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { CardController } from './card.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
+import { QueryBuilder } from './builders/query.builder';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { HttpModule } from '@nestjs/axios';
     }),
   ],
   controllers: [CardController],
-  providers: [CardController, CardService],
+  providers: [CardController, CardService, QueryBuilder],
   exports: [CardController],
 })
 export class CardModule {}
