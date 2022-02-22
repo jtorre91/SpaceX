@@ -10,18 +10,16 @@ export class QueryBuilder {
     cardController: CardController,
   ): Promise<string> {
     const key = card.type.toUpperCase();
-    if (apiTrello.cardTypes.includes(key)) {
-      const mapper = new CardType().mapper(card, apiTrello.shuffleMembers);
-      if (mapper.has(key)) {
-        const params = new TrelloParams(
-          apiTrello.key,
-          apiTrello.token,
-          apiTrello.idList,
-          mapper.get(key),
-          cardController,
-        );
-        return await params.toQuery();
-      }
+    const mapper = new CardType().mapper(card, apiTrello.shuffleMembers);
+    if (mapper.has(key)) {
+      const params = new TrelloParams(
+        apiTrello.key,
+        apiTrello.token,
+        apiTrello.idList,
+        mapper.get(key),
+        cardController,
+      );
+      return await params.toQuery();
     }
     throw Error('Type not exists');
   }

@@ -6,11 +6,10 @@ export default registerAs('appConfig', () => ({
     url: 'https://api.trello.com/1',
     timeout: 7000,
     maxRedirects: 3,
-    key: '6bf4d17200908d127201779dd73e9aad',
-    token: '5fb2f3670202bd8873c49c16632664cdfb876fe32db4ae47d2234e184122c74f',
+    key: 'f084b29610f75f55de91cc11fba919df',
+    token: '7d894d7070991f692f587290e9a4b92e844ec79853794048687d76e90135ed0e',
     idList: '62101d9051c84b1d89319761',
     idBoard: '62101c96a9bb7d34db53d278',
-    cardTypes: ['BUG', 'ISSUE', 'TASK'],
     shuffleMembers: true,
   },
 }));

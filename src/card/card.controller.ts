@@ -18,7 +18,8 @@ export class CardController {
   async create(@Body() card: any): Promise<any> {
     try {
       const query = await this.queryBuilder.buildCreate(card, this.trelloConfig, this);
-      return await this.cardService.createCard(query);
+      await this.cardService.createCard(query);
+      return 'Card created successful';
     } catch (error) {
       throw new BadRequestException(error.message);
     }
