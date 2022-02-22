@@ -1,38 +1,17 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descripción
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+El proyecto lo arme utilizando NestJS un framework con typeScript -> https://nestjs.com.
 
-## Description
+## Installación
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+Clonar el proyecto del repositorio. Situarse sobre la carpeta del mismo y ejecutar:
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Para correr la app
 
 ```bash
 # development
@@ -40,9 +19,6 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
 ## Test
@@ -57,17 +33,41 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+## Configuración de entorno
 
-## Support
+Las configuraciones de entorno se pueden cambiar desde el archivo app.config.ts ubicado en /space-x/src/config/app.config.ts
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```ts
+{
+  port: 3000,
+  apiTrello: {
+    url: 'https://api.trello.com/1',
+    timeout: 7000,
+    maxRedirects: 3,
+    key: '6bf4d17200908d127201779dd73e9aad',
+    token: '5fb2f3670202bd8873c49c16632664cdfb876fe32db4ae47d2234e184122c74f',
+    idList: '62101d9051c84b1d89319761',
+    idBoard: '62101c96a9bb7d34db53d278',
+    shuffleMembers: true,
+  },
+}
+```
 
-## Stay in touch
+#### Parametros:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+* port <int>: Indica en que puerto se va a iniciar la applicación.
+ 
+* apiTrello: Indica las configuraciones que se relacionan a la api de trello.
 
-## License
+* key <string>: Indica la auth_key del usuario de trello con el que desea realizar operaciones.
 
-Nest is [MIT licensed](LICENSE).
+* token <string>: Indica la auth_token del usuario de trello con el que desea realizar operaciones.
+
+* idList <string>: Indica el id que representa la lista/columna de trello sobre la cual se van a ejecutar las operaciones. Por ahora la aplicación sólo permite trabajar con una columna por vez.
+
+* idBoard <string>: Indica el id que representa el tablero de trello sobre la cual se van a ejecutar las operaciones. Por ahora la aplicación sólo permite trabajar con un tablero por vez.
+
+* suffleMembers: Este booleano si esta en true indica que asignara aleatoreamente las tarjetas creadas entre los usuarios del tablero sobre el cual se esta trabajando. Sólo si el tipo de carta lo refleja.
+
+## Author
+- [Javier A. Torre](javier.torre91@gmail.com)
