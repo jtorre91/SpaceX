@@ -1,9 +1,9 @@
                                 
 # Space X
 
-Space-x es una api desarrollada para crear tarjetas en un tablero de trello. [Desafio](https://doc.clickup.com/p/h/e12h-16043/f3e54f9ffd37f57/e12h-16043)
+Space-x es una api desarrollada para crear tarjetas en un tablero de Trello. [Desafio](https://doc.clickup.com/p/h/e12h-16043/f3e54f9ffd37f57/e12h-16043)
 
-## Installación
+## Instalación
 
 Clonar el proyecto del repositorio. Situarse sobre la carpeta del mismo y ejecutar:
 
@@ -181,9 +181,9 @@ Las configuraciones de entorno se pueden cambiar desde el archivo app.config.ts 
 
 * shuffleMembers <boolean>: Indica que asignara aleatoreamente las tarjetas creadas entre los usuarios del tablero sobre el cual se esta trabajando. Sólo si el tipo de carta lo refleja.
   
-## Que me falto ?
+## Qué me falto ?
   
-  Si bien la api tiene las funcionalidades que se pidieron, por se un desafío no quería extenderme demasiado con el desarrollo del mismo. Asi que nombro algunas     cosas que me quedaron sin resolver, pero creo que le sumarían al proyecto para tener en concideración.
+  Si bien la api tiene las funcionalidades que se pidieron, por ser un desafío no quería extenderme demasiado con el desarrollo del mismo. Asi que nombro algunas     cosas que me quedaron sin resolver, pero creo que le sumarían al proyecto para tener en concideración.
   
   1 - Unit test, claramente le agregaría testing a los componentes de mi api. Completando minimamente con un 80% o más de coverage.
   
