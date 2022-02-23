@@ -1,9 +1,7 @@
-                                          # SPACE-X
-## Descripción
+                                
+# Space X
 
-Space-x es una api desarrollada para crear tarjetas en un tablero de trello. El proyecto lo arme utilizando NestJS un framework con TypeScript e inyección de dependencias -> https://nestjs.com.
-
-  [Challenge](https://doc.clickup.com/p/h/e12h-16043/f3e54f9ffd37f57/e12h-16043)
+Space-x es una api desarrollada para crear tarjetas en un tablero de trello. [Desafio](https://doc.clickup.com/p/h/e12h-16043/f3e54f9ffd37f57/e12h-16043)
 
 ## Installación
 
@@ -13,7 +11,7 @@ Clonar el proyecto del repositorio. Situarse sobre la carpeta del mismo y ejecut
 $ npm install
 ```
 
-## Para correr la app
+## Run
 
 ```bash
 # development
@@ -88,6 +86,7 @@ _Create Issue:_ Crea una card de tipo Issue y la deja en la lista ToDo
     "description": "The pilots send messages to Central"
 }'
 ```
+
 #### Task
 
   _Create Task:_ Crea una card de tipo Task a la que se le puede asignar alguna de las etiquetas que disponga en el tablero.
@@ -109,7 +108,8 @@ _Create Issue:_ Crea una card de tipo Issue y la deja en la lista ToDo
     "category": "Maintenance"
 }'
 ```
- ### Listas y Tableros
+
+ ### Tableros y Listas
 
  La api ya viene con un tablero en donde trabajar y una lista en donde va a insertar las nuevas tarjetas que vaya creando. Si usted desea cambiar uno de estos dos debe realizar lo siguiente.
 
@@ -129,7 +129,9 @@ Para obtener este id de uno de sus tableros de trabajo, lo primero que necesita 
 
 Estos pueden ser obtenidos desde https://trello.com/app-key con su cuenta de trello logueada. Una vez que lo obtenga puede utilizar el siguiente curl para obtener el _id_ que desea.
 
-```curl --location --request GET 'https://api.trello.com/1/members/me/boards?key=<YOUR_KEY>&token=<YOUR_TOKEN>'
+```
+curl --location --request GET 'https://api.trello.com/1/members/me/boards?key=<YOUR_KEY>&token=<YOUR_TOKEN>'
+
 ```
 
  #### Lista
@@ -138,7 +140,9 @@ La lista es la columna o lista de trello sobre la cual van a crearse las tarjeta
 
 Para cambiar de lista debe modificar el *idList* en las configuraciones de entorno. Para saber que id corresponde con que tarjeta puede utilizar el endpoint "Search on Board"
 
-```curl --location --request GET 'http://localhost:3000/card/board?search=lists'
+```
+curl --location --request GET 'http://localhost:3000/card/board?search=lists'
+
 ```
 
 ## Configuración de entorno
@@ -176,6 +180,21 @@ Las configuraciones de entorno se pueden cambiar desde el archivo app.config.ts 
 * idBoard <string>: Indica el id que representa el tablero de trello sobre la cual se van a ejecutar las operaciones. Por ahora la aplicación sólo permite trabajar con un tablero por vez.
 
 * shuffleMembers <boolean>: Indica que asignara aleatoreamente las tarjetas creadas entre los usuarios del tablero sobre el cual se esta trabajando. Sólo si el tipo de carta lo refleja.
+  
+## Que me falto ?
+  
+  Si bien la api tiene las funcionalidades que se pidieron, por se un desafío no quería extenderme demasiado con el desarrollo del mismo. Asi que nombro algunas     cosas que me quedaron sin resolver, pero creo que le sumarían al proyecto para tener en concideración.
+  
+  1 - Unit test, claramente le agregaría testing a los componentes de mi api. Completando minimamente con un 80% o más de coverage.
+  
+  2 - Manejo de errores. Agregaría un error handler para tratar bien los distintos tipos de excepciones.
+  
+  3 - Logger module. Un logger para ir logueando los errores, o request, o lo que se quiera.
+  
+  4 - Un endpoint extra donde te pida sólo el auth_key, auth_token y devuelva una lista con todos los boards, para no tener que ir contra la api de trello               si se quiere cambiar sobre el tablero que se esta trabajando.
 
+## Stack 🛠️ 
+  - [NestJS](https://nestjs.com)
+  
 ## Author
-- [Javier A. Torre](javier.torre91@gmail.com)
+  - [Javier A. Torre](javier.torre91@gmail.com)
