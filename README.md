@@ -7,7 +7,8 @@ Space-x es una api desarrollada para crear tarjetas en un tablero de Trello. [De
 
 Clonar el proyecto del repositorio. Situarse sobre la carpeta del mismo y ejecutar:
 
-```bash
+```bash 
+$ npm i -g @nestjs/cli
 $ npm install
 ```
 
